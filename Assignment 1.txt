@@ -1,0 +1,77 @@
+#include <iostream>
+#include <string>
+
+int main()
+{
+	std::string input;
+	bool alphaCheck = false;
+	bool firstCheck = false;
+	bool lastWasConnector = false;
+	bool characterCheck = false;
+	bool ifAndOnlyCheck = false;
+
+	std::cout << "Input your string.\n";
+	std::getline(std::cin, input);
+	std::cout << "\nYou have input: " << input << std::endl;
+
+
+	for (int i = 0; i < input.size(); i++) {
+		char c = input[i];
+		char d = input[i + 1];
+
+		if (isalpha(input[0]) || input[0] == '~' || input[0] == ' ') {
+			firstCheck = true;
+		}
+		if (firstCheck == false) {
+			std::cout << "Invalid format, first character must be '~', or an alphabet letter, or a space.\n";
+			break;
+		}
+		for (int j = 0; j < input.size(); j++) {
+			if (isalpha(input[j])) {
+				alphaCheck = true;
+			}
+		}
+
+		if (alphaCheck == false) {
+			std::cout << "Invalid format, no alphabet letter found\n";
+			break;
+		}
+
+		if ((c == '^' || c == 'V' || c == '!' || (c == '-' && d == '>')) && lastWasConnector == true ) {
+			std::cout << "Invalid format, consecutive connectors ('^' or 'V' or '!' or '->') found.\n";
+			break;
+		}
+		if (c == ' ' || c == '^' || c == 'V' || c == '!' || c == '~' || isupper(c) || (c == '-' && d == '>')) {
+			characterCheck = true;
+			if (c == '^' || c == 'V' || c == '!' || (c == '-' && d == '>')) {
+				lastWasConnector = true;
+				if (c == '-' && d == '>') {
+					ifAndOnlyCheck = true;
+				}
+			}
+			else {
+				lastWasConnector = false;
+			}
+		}
+		else {
+			characterCheck = false;
+		}
+		if (characterCheck == false && ifAndOnlyCheck == false) {
+			std::cout << "Invalid format, " << c <<" is not a WFF\n";
+			break;
+		}
+		if (isalpha(c) && isalpha(input[i + 1])) {
+			std::cout << "Invalid format, 2 consecutive alphas found.\n";
+			break;
+		}
+		if (c == input[i + 1] && input[i + 1] != '~') {
+			std::cout << "Invalid format, not a valid WFF\n";
+			break;
+		}
+		if (c == d && (d != '~' || d != ' ')) {
+			std::cout << "Invalid format, invalid consecutive characters found.\n";
+		}
+	}
+
+	return 0;
+}
