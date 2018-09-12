@@ -4,74 +4,108 @@
 int main()
 {
 	std::string input;
+	bool repeat = true;
+	bool charRepeat = true;
+	char cInput;
 	bool alphaCheck = false;
 	bool firstCheck = false;
 	bool lastWasConnector = false;
 	bool characterCheck = false;
 	bool ifAndOnlyCheck = false;
 
+	do{
 	std::cout << "Input your string.\n";
 	std::getline(std::cin, input);
+	std::cin.ignore();
 	std::cout << "\nYou have input: " << input << std::endl;
 
+	
+		for (int i = 0; i < input.size(); i++) {
+			char c = input[i];
+			char d = input[i + 1];
 
-	for (int i = 0; i < input.size(); i++) {
-		char c = input[i];
-		char d = input[i + 1];
-
-		if (isalpha(input[0]) || input[0] == '~' || input[0] == ' ') {
-			firstCheck = true;
-		}
-		if (firstCheck == false) {
-			std::cout << "Invalid format, first character must be '~', or an alphabet letter, or a space.\n";
-			break;
-		}
-		for (int j = 0; j < input.size(); j++) {
-			if (isalpha(input[j])) {
-				alphaCheck = true;
+			if (isalpha(input[0]) || input[0] == '~' || input[0] == ' ') {
+				firstCheck = true;
 			}
-		}
+			if (firstCheck == false) {
+				std::cout << "Invalid format, first character must be '~', or an alphabet letter, or a space.\n";
+				repeat = false;
+				break;
+			}
+			for (int j = 0; j < input.size(); j++) {
+				if (isalpha(input[j])) {
+					alphaCheck = true;
+				}
+			}
 
-		if (alphaCheck == false) {
-			std::cout << "Invalid format, no alphabet letter found\n";
-			break;
-		}
+			if (alphaCheck == false) {
+				std::cout << "Invalid format, no alphabet letter found\n";
+				repeat = false;
+				break;
+			}
 
-		if ((c == '^' || c == 'V' || c == '!' || (c == '-' && d == '>')) && lastWasConnector == true ) {
-			std::cout << "Invalid format, consecutive connectors ('^' or 'V' or '!' or '->') found.\n";
-			break;
-		}
-		if (c == ' ' || c == '^' || c == 'V' || c == '!' || c == '~' || isupper(c) || (c == '-' && d == '>')) {
-			characterCheck = true;
-			if (c == '^' || c == 'V' || c == '!' || (c == '-' && d == '>')) {
-				lastWasConnector = true;
-				if (c == '-' && d == '>') {
-					ifAndOnlyCheck = true;
+			if ((c == '^' || c == 'V' || c == '!' || (c == '-' && d == '>')) && lastWasConnector == true) {
+				std::cout << "Invalid format, consecutive connectors ('^' or 'V' or '!' or '->') found.\n";
+				repeat = false;
+				break;
+			}
+			if (c == ' ' || c == '^' || c == 'V' || c == '!' || c == '~' || isupper(c) || (c == '-' && d == '>')) {
+				characterCheck = true;
+				if (c == '^' || c == 'V' || c == '!' || (c == '-' && d == '>')) {
+					lastWasConnector = true;
+					if (c == '-' && d == '>') {
+						ifAndOnlyCheck = true;
+					}
+				}
+				else {
+					lastWasConnector = false;
 				}
 			}
 			else {
-				lastWasConnector = false;
+				characterCheck = false;
+			}
+			if (characterCheck == false && ifAndOnlyCheck == false) {
+				std::cout << "Invalid format, " << c << " is not a WFF\n";
+				repeat = false;
+				break;
+			}
+			if (isalpha(c) && isalpha(input[i + 1])) {
+				std::cout << "Invalid format, 2 consecutive alphas found.\n";
+				repeat = false;
+				break;
+			}
+			if (c == input[i + 1] && input[i + 1] != '~') {
+				std::cout << "Invalid format, not a valid WFF\n";
+				repeat = false;
+				break;
+			}
+			if (c == d && (d != '~' || d != ' ')) {
+				std::cout << "Invalid format, invalid consecutive characters found.\n";
+				repeat = false;
+				break;
 			}
 		}
-		else {
-			characterCheck = false;
-		}
-		if (characterCheck == false && ifAndOnlyCheck == false) {
-			std::cout << "Invalid format, " << c <<" is not a WFF\n";
-			break;
-		}
-		if (isalpha(c) && isalpha(input[i + 1])) {
-			std::cout << "Invalid format, 2 consecutive alphas found.\n";
-			break;
-		}
-		if (c == input[i + 1] && input[i + 1] != '~') {
-			std::cout << "Invalid format, not a valid WFF\n";
-			break;
-		}
-		if (c == d && (d != '~' || d != ' ')) {
-			std::cout << "Invalid format, invalid consecutive characters found.\n";
-		}
-	}
-
+		if (repeat == true) {
+			std::cout << "You entered a WFF!\n";
+			}
+		do {
+			std::cout << "Would you like to try another input?: (Y/N)\n";
+			std::cin >> cInput;
+			cInput = toupper(cInput);
+			if (cInput == 'Y' || 'N') {
+				if (cInput == 'Y') {
+					repeat = true;
+				}
+				if (cInput == 'N') {
+					repeat = false;
+				}
+				charRepeat = false;
+			}
+			else {
+				std::cout << "Invalid input.\n";
+			}
+		} while (charRepeat == true);
+		
+	} while (repeat == true);
 	return 0;
 }
