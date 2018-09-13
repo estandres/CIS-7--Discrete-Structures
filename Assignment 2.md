@@ -12,5 +12,5 @@ Q v P' <=>   Q v P'   (Double Negation)
 (P' ^ Q') v (P' ^ R) v (R ^ Q') v R <=> (P v Q) -> R
 (P' ^ Q') v (P' ^ R) v R <=> (P v Q) -> R                  (Absorption)
 (P' ^ Q') v R   <=> (P v Q) -> R                           (Absorption)
-(P' ^ Q')' -> R <=> (P v Q) -> R                           (Implication)
+(P' ^ Q')' -> R <=> (P v Q) -> R                           (Implication) (De Morgan's)
 (P v Q) -> R    <=> (P v Q) -> R                           (Double Negation)
