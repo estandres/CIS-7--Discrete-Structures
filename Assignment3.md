@@ -18,11 +18,37 @@ F	F	T	T	T	T	T			F
 It is neither a tautology or a contradiction.
 
 4. (p ∧ q) → r <=> p → (q → r )
+                   p' v (q -> r)    (Implication)
+                   p' v (q' v r)    (Implication)
+   (p^q)' v r                       (Implication)
+   (p' v q') v r	                  (De Morgan's)
+   (p' v q') v r <=> (p' v q') v r  (Associative)
    
-   (p ^ q)' v r		(Implication)
-   ('p v 'q) v r	(De Morgan's)
-   ('p v r) v ('q v r)	(Distributive)
-   ('p v r
+   (q ∨ r ) → p <=> (q → p)∧(r → p)
+                    (q' v p) ^ (r' v p)      (Implication)
+   (q v r)' v p                              (Implication)
+   (q' ^ r') v p                             (De Morgan's)
+   (q' v p) ^ (r' v p) <=> (q' v p^ (r' v p) (Distributive)           
+  
+   
+    
+   
+   
+   
+   
+   
+   
+
+
+
+
+
+
+
+
+
+                
+                
    
     
    
