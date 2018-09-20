@@ -27,3 +27,7 @@ Q v P' <=>   Q v P'   (Double Negation)
 (P' ^ Q')' -> R <=> (P v Q) -> R                           (Implication) (De Morgan's)
 
 (P v Q) -> R    <=> (P v Q) -> R                           (Double Negation)
+
+Let A(x) = "x is a flower"
+Let B(x) = "x is a rock"
+"Some flowers and some rocks are sometimes flowers and rocks."
