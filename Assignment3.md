@@ -36,6 +36,11 @@ It is neither a tautology or a contradiction.
    (q' ^ r') v p                             (De Morgan's)
    (q' v p) ^ (r' v p) <=> (q' v p^ (r' v p) (Distributive)           
   
+  Part 4:
+  Translate into English: ∃x∀y∀z(City(x) ∧ Traveler (y) ∧ Lives(z,x)) → (Loves(y,x)∧ ¬Loves(z,x))
+  
+  There exists some cities in which every traveler loves the city, and every person who lives in it does not love the city.
+  ∀x∀y(Traveler(x) ^ City(y) ^ Lives (x,y) -> ¬Loves(x,y)
    
     
    
