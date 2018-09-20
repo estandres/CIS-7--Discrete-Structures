@@ -1,4 +1,4 @@
-P -> Q <=>   Q'->P'
+1. P -> Q <=>   Q'->P'
 
 P' v Q <=>   Q'->P'   (Implication)
 
@@ -10,7 +10,7 @@ Q v P' <=>   Q v P'   (Double Negation)
 
 
 
-(P -> R) ^ (Q -> R) <=> (P v Q) -> R
+2. (P -> R) ^ (Q -> R) <=> (P v Q) -> R
 
 (P' v R) ^ (Q' v R) <=> (P v Q) -> R                       (Implication)
 
