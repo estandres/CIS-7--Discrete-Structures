@@ -4,14 +4,10 @@
 
 3. 
 A	B	~A	~B	~B -> ~A     ~B -> A	(~B -> A) -> B 	 (~B -> ~A) -> ((~B -> A) -> B)
-
-T	T	F	F	T	     T		T   		 T
-
-T	F	F	T	F	     T		F		 T
-
-F	T	T	F	T	     T		T		 T
-
-F	F	T	T	T	     F		T		 T
+T	T	F	  F	      T	            T	      	T   		                  T
+T	F	F 	T     	F	            T		      F		                      T
+F	T	T	  F	      T	            T     		T                     		T
+F	F	T	  T	      T	            F		      T		                      T
 
 It is a tautology.
 
