@@ -3,8 +3,10 @@
 
 int main()
 {
-	std::string input;
 	bool repeat = true;
+	do{
+	std::string input;
+	
 	bool charRepeat = true;
 	char cInput;
 	bool alphaCheck = false;
@@ -16,9 +18,11 @@ int main()
 	bool ifAndOnlyCheck = false;
 	bool characterCheck = false;
 	bool followingIsValid = true;
-	
+	int leftParCount = 0;
+	int rightParCount = 0;
+
 	int count = 0;
-	do {
+	
 		std::cout << "Input your string.\n";
 		std::cin >> input;
 		std::cin.ignore();
@@ -30,7 +34,7 @@ int main()
 			char c = input[i];
 			char d = input[i + 1];
 
-			if (isalpha(input[0]) || input[0] == '~' || input[0] == ' ') {
+			if (isalpha(input[0]) || input[0] == '~' || input[0] == ' ' || input[0] == '(') {
 				firstCheck = true;
 			}
 			if (firstCheck == false) {
@@ -42,6 +46,18 @@ int main()
 				if (isalpha(input[j])) {
 					alphaCheck = true;
 				}
+				if (j == '(') {
+					leftParCount++;
+				}
+				if (j == ')') {
+					rightParCount++;
+				}
+			}
+
+			if (rightParCount != leftParCount) {
+				std::cout << "Invalid format, you left an open paranthesis bracket!\n";
+				repeat = false;
+				break;
 			}
 			if (alphaCheck == false) {
 				std::cout << "Invalid format, no alphabet letter found\n";
@@ -49,18 +65,18 @@ int main()
 				break;
 			}
 
-			if ((c == '^' || c == 'V' || c == '!' || (c == '-' && d == '>')) && lastWasConnector == true) {
-				std::cout << "Invalid format, consecutive connectors ('^' or 'V' or '!' or '->') found.\n";
+			if ((c == '^' || c == 'V' || c == '~' || (c == '-' && d == '>')) && lastWasConnector == true) {
+				std::cout << "Invalid format, consecutive connectors ('^' or 'V' or '~' or '->') found.\n";
 				repeat = false;
 				break;
 			}
-			if (c == ' ' || c == '^' || c == 'V' || c == '!' || c == '~' || isupper(c) || (c == '-' && d == '>')) {
+			if (c == ' ' || c == '^' || c == 'V' || c == '~' || isupper(c) || (c == '-' && d == '>')) {
 				characterCheck = true;
 			}
 			else {
 				characterCheck = false;
 			}
-			if (((c == '^' || c == 'V' || c == '!' || (c == '-' && d == '>')) && (lastWasNot == false || lastWasAlpha == false || lastWasSpace == false)))  {
+			if (((c == '^' || c == 'V' || (c == '-' && d == '>')) && (lastWasNot == false || lastWasAlpha == false || lastWasSpace == false)))  {
 				lastWasConnector = true;
 			}
 			else {
@@ -68,6 +84,9 @@ int main()
 			}
 			if (c == '-' && d == '>') {
 				ifAndOnlyCheck = true;
+			}
+			else if (c == '(') {
+
 			}
 			else {
 				ifAndOnlyCheck = false;
@@ -89,7 +108,7 @@ int main()
 			if (c == '~') {
 				lastWasNot = true;
 				lastWasConnector = false;
-				if (isalpha(d) || d == '~' || d == ' ') {
+				if (isalpha(d) || d == '~' || d == ' ' || d == '(') {
 					followingIsValid = true;
 				}
 				else {
@@ -102,7 +121,7 @@ int main()
 			}
 			if (ifAndOnlyCheck == true) {
 				char e = input[i + 2];
-				if (isalpha(e) || e == '~') {
+				if (isalpha(e) || e == '~' || e == '(') {
 					followingIsValid = true;
 				}
 				else {
@@ -119,18 +138,24 @@ int main()
 				repeat = false;
 				break;
 			}
-			if (c == input[i + 1] && input[i + 1] != '~') {
-				std::cout << "Invalid format, not a valid WFF\n";
-				repeat = false;
-				break;
-			}
 			if (c == d && lastWasNot == false && lastWasSpace == false) {
 				std::cout << "Invalid format, invalid consecutive characters found.\n";
 				repeat = false;
 				break;	
 			}
 			if (followingIsValid == false) {
-				std::cout << "Invalid format, your input is not a WFF\n";
+				std::cout << "Invalid format, your input is not a WFF.\n";
+				repeat = false;
+				break;
+			}
+			
+			if (c == '(' && lastWasAlpha) {
+				std::cout << "Invalid format, you cannot place a paranthesis right after a letter.\n";
+				repeat = false;
+				break;
+			}
+			if (c == ')' && (lastWasConnector == true || lastWasNot == true)) {
+				std::cout << "Invalid format, you cannot close a paranthesis in that way.\n";
 				repeat = false;
 				break;
 			}
