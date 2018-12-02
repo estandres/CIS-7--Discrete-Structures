@@ -31,7 +31,6 @@ int main()
 
 		for (int i = 0; i < input.size(); i++) {
 			count++;
-			std::cout << "Loop Iteration: " << count << std::endl;
 			char c = input[i];
 			char d = input[i + 1];
 
@@ -66,19 +65,18 @@ int main()
 				break;
 			}
 
-			if ((c == '^' || c == 'V' || c == '!' || (c == '-' && d == '>')) && lastWasConnector == true) {
-				std::cout << "Invalid format, consecutive connectors ('^' or 'V' or '!' or '->') found.\n";
+			if ((c == '^' || c == 'V' || c == '~' || (c == '-' && d == '>')) && lastWasConnector == true) {
+				std::cout << "Invalid format, consecutive connectors ('^' or 'V' or '~' or '->') found.\n";
 				repeat = false;
 				break;
 			}
-			std::cout << "lastWasConnector: " << lastWasConnector << " " << std::endl;
-			if (c == ' ' || c == '^' || c == 'V' || c == '!' || c == '~' || isupper(c) || (c == '-' && d == '>')) {
+			if (c == ' ' || c == '^' || c == 'V' || c == '~' || isupper(c) || (c == '-' && d == '>')) {
 				characterCheck = true;
 			}
 			else {
 				characterCheck = false;
 			}
-			if (((c == '^' || c == 'V' || c == '!' || (c == '-' && d == '>')) && (lastWasNot == false || lastWasAlpha == false || lastWasSpace == false)))  {
+			if (((c == '^' || c == 'V' || (c == '-' && d == '>')) && (lastWasNot == false || lastWasAlpha == false || lastWasSpace == false)))  {
 				lastWasConnector = true;
 			}
 			else {
@@ -129,7 +127,6 @@ int main()
 				else {
 					followingIsValid = false;
 				}
-				std::cout << "followingIsValid: " << followingIsValid << std::endl << std::endl;
 			}
 			if (characterCheck == false && ifAndOnlyCheck == false && (c == '>' && input[i-1] != '-') ) {
 				std::cout << "Invalid format, " << c << " is not a WFF\n";
