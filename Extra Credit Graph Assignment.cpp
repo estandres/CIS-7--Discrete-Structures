@@ -7,17 +7,17 @@ int main() {
 	int numOfUniqueEdges = 0;		//Keeps track non-parallel edges, shared between any two vertices.
 	int i = 0;
 	int j = 0;
-	int input;
+
 	bool repeat = true;
 	std::vector <Vertice> vectorOfVertices;
 	do {
 		Vertice *temp = new Vertice;
-		
+		int input = 0;
 		std::cout << "What would you like to do?\n"
 			<< "1) Create a vertice.\n"
 			<< "2) Create an edge.\n"
 			<< "3) Get graph info.\n"
-			<< "Or enter any kety to quit the program.\n";
+			<< "Or enter any key to quit the program.\n";
 		std::cin >> input;
 
 		if (input == 1) {
@@ -81,7 +81,7 @@ int main() {
 					}
 				}
 				if (repeat == true) {
-					std::cout << "2 You entered a vertice that does not exist. Please try again.\n";
+					std::cout << "You entered a vertice that does not exist. Please try again.\n";
 				}
 			//	system("CLS");
 			} while (repeat == true);
